@@ -17,7 +17,6 @@ class TaallamApp extends StatelessWidget {
       title: 'تعلم وربح',
       theme: ThemeData(
         primarySwatch: Colors.teal,
-        fontFamily: 'Cairo',
       ),
       home: const HomePage(),
     );
@@ -53,7 +52,7 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: const Text('خلص 29 درهم باش تكمل'),
-        content: const Text('الفترة التجريبية سالات. خاصك تخلص الاشتراك الشهري باش تبيع منتوجات جداد.'),
+        content: const Text('الفترة التجريبية سالات. خاصك تخلص الاشتراك الشهري.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
