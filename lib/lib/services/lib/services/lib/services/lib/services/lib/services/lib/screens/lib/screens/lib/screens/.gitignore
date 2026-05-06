@@ -1,0 +1,12 @@
+*.iml
+*.lock
+.metadata
+build/
+.dart_tool/
+.packages
+android/.gradle/
+android/app/build/
+ios/Pods/
+ios/.symlinks/
+pubspec.lock
+.env
