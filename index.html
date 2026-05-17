@@ -42,9 +42,7 @@
     <button class="btn btn-market" onclick="navigate('market')">🛒</button>
     <button class="btn btn-wallet" onclick="navigate('wallet')">💰</button>
 
-    <button class="whatsapp-btn" onclick="openWhatsApp()">
-        💬 الدعم عبر واتساب
-    </button>
+    <button class="whatsapp-btn" onclick="openWhatsApp()">💬 الدعم عبر واتساب</button>
 </div>
 
 <div class="popup" id="paywall">
@@ -60,7 +58,6 @@
 
 <script>
     let daysLeft = 30;
-    let productsSold = 0;
     let isSubscribed = false;
 
     function updateTrialBadge() {
@@ -77,6 +74,8 @@
     }
 
     function navigate(screen) {
+        let productsSold = parseInt(localStorage.getItem('productsSold') || '0');
+
         if (!isSubscribed && daysLeft <= 0) {
             showPaywall();
             return;
@@ -87,15 +86,11 @@
         }
 
         if (screen === 'skill') {
-            alert('🎓 تعلم حرفة\n\nفيديوهات تعليمية - اختار حرفة وابدأ التعلم');
+            window.location.href = 'skill.html';
         } else if (screen === 'market') {
-            productsSold++;
-            alert('🛒 سوق الحومة\n\nبيع وشراء المنتوجات\n\nعدد المنتوجات المباعة: ' + productsSold);
-            if (!isSubscribed && productsSold >= 4) {
-                showPaywall();
-            }
+            window.location.href = 'market.html';
         } else if (screen === 'wallet') {
-            alert('💰 فلوسي\n\nأرباحك من المبيعات: 0 درهم');
+            window.location.href = 'wallet.html';
         }
     }
 
@@ -119,7 +114,6 @@
         window.open('https://wa.me/212711366556', '_blank');
     }
 
-    // محاكاة مرور الأيام
     setInterval(() => {
         if (daysLeft > 0 && !isSubscribed) {
             daysLeft--;
@@ -128,7 +122,7 @@
                 showPaywall();
             }
         }
-    }, 10000); // كل 10 ثواني = يوم
+    }, 10000);
 
     updateTrialBadge();
 </script>
