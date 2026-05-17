@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوق الحومة - تعلم وربح</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background: #f5f5f5; }
+        .appbar { background: #00897B; color: white; padding: 15px; text-align: center; position: relative; }
+        .appbar h1 { font-size: 20px; }
+        .back-btn { position: absolute; left: 15px; top: 15px; color: white; text-decoration: none; font-size: 24px; }
+        .container { padding: 20px; max-width: 500px; margin: 0 auto; }
+        .product-card { background: white; border-radius: 20px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: flex; gap: 15px; align-items: center; }
+        .product-img { width: 80px; height: 80px; background: #eee; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+        .product-info { flex: 1; }
+        .product-info h3 { color: #333; }
+        .product-info p { color: #666; font-size: 14px; }
+        .price { color: #4CAF50; font-weight: bold; font-size: 18px; }
+        .sell-btn { background: #4CAF50; color: white; border: none; padding: 15px; border-radius: 15px; width: 100%; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        .city-tag { background: #FF9800; color: white; padding: 8px 16px; border-radius: 20px; text-align: center; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="appbar">
+    <a href="index.html" class="back-btn">←</a>
+    <h1>🛒 سوق الحومة</h1>
+</div>
+
+<div class="container">
+    <div class="city-tag">📍 Casablanca</div>
+
+    <div class="product-card">
+        <div class="product-img">🧼</div>
+        <div class="product-info">
+            <h3>صابون بلدي</h3>
+            <p>صنع يدوي - جودة عالية</p>
+            <p class="price">25 درهم</p>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <div class="product-img">🕯️</div>
+        <div class="product-info">
+            <h3>شمعة معطرة</h3>
+            <p>يدوية الصنع - روائح طبيعية</p>
+            <p class="price">15 درهم</p>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <div class="product-img">🧵</div>
+        <div class="product-info">
+            <h3>قفطان تقليدي</h3>
+            <p>خياطة يدوية - تطريز مغربي</p>
+            <p class="price">350 درهم</p>
+        </div>
+    </div>
+
+    <button class="sell-btn" onclick="sellProduct()">📸 بيع منتوجك هنا</button>
+</div>
+
+<script>
+    let count = parseInt(localStorage.getItem('productsSold') || '0');
+
+    function sellProduct() {
+        count++;
+        localStorage.setItem('productsSold', count);
+        alert('✅ تمت إضافة منتوجك!\n\nعدد المنتوجات المباعة: ' + count + '\n\nإلا بعتي 4 منتوجات، خاصك تشترك (29 درهم/شهر)');
+        if (count >= 4) {
+            alert('⚠️ وصلتي لـ 4 منتوجات!\nخاصك تخلص الاشتراك باش تكمل البيع.');
+            window.location.href = 'index.html';
+        }
+    }
+</script>
+
+</body>
+</html>
