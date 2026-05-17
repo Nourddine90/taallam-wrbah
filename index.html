@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعلم وربح - by Nourddine Abatal</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Cairo', sans-serif; background: #f5f5f5; }
+        .appbar { background: #00897B; color: white; padding: 15px; text-align: center; }
+        .appbar h1 { font-size: 24px; }
+        .appbar p { font-size: 12px; opacity: 0.8; }
+        .container { padding: 20px; max-width: 500px; margin: 0 auto; }
+        .trial-badge { background: linear-gradient(135deg, #66BB6A, #43A047); color: white; padding: 20px; border-radius: 20px; text-align: center; margin-bottom: 30px; font-size: 20px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .btn { width: 100%; padding: 25px; border: none; border-radius: 20px; font-size: 40px; margin-bottom: 20px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; }
+        .btn:active { transform: scale(0.95); }
+        .btn-skill { background: #FF9800; }
+        .btn-market { background: #2196F3; }
+        .btn-wallet { background: #4CAF50; }
+        .whatsapp-btn { width: 100%; padding: 16px; border: none; border-radius: 16px; font-size: 18px; cursor: pointer; background: #25D366; color: white; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px; box-shadow: 0 4px 15px rgba(37,211,102,0.4); }
+        .popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; }
+        .popup.active { display: flex; }
+        .popup-content { background: white; padding: 30px; border-radius: 20px; text-align: center; max-width: 350px; width: 90%; }
+        .popup-content h2 { color: #00897B; margin-bottom: 15px; }
+        .popup-content p { margin-bottom: 20px; color: #666; }
+        .popup-buttons { display: flex; gap: 10px; justify-content: center; }
+        .btn-later { padding: 12px 24px; border: 2px solid #ccc; border-radius: 12px; background: white; cursor: pointer; font-size: 16px; }
+        .btn-pay { padding: 12px 24px; border: none; border-radius: 12px; background: #4CAF50; color: white; cursor: pointer; font-size: 16px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="appbar">
+    <h1>تعلم وربح</h1>
+    <p>by Nourddine Abatal</p>
+</div>
+
+<div class="container">
+    <div class="trial-badge" id="trialBadge">⏳ الأيام المجانية: 30 يوم</div>
+
+    <button class="btn btn-skill" onclick="navigate('skill')">🎓</button>
+    <button class="btn btn-market" onclick="navigate('market')">🛒</button>
+    <button class="btn btn-wallet" onclick="navigate('wallet')">💰</button>
+
+    <button class="whatsapp-btn" onclick="openWhatsApp()">
+        💬 الدعم عبر واتساب
+    </button>
+</div>
+
+<div class="popup" id="paywall">
+    <div class="popup-content">
+        <h2>خلص 29 درهم باش تكمل</h2>
+        <p>الفترة التجريبية سالات ولا بعتي 4 منتوجات. خاصك تخلص الاشتراك الشهري باش تبيع منتوجات جداد. الفيديوهات التعليمية باقا خدامين.</p>
+        <div class="popup-buttons">
+            <button class="btn-later" onclick="closePaywall()">من بعد</button>
+            <button class="btn-pay" onclick="subscribe()">خلص دابا - 29 درهم</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let daysLeft = 30;
+    let productsSold = 0;
+    let isSubscribed = false;
+
+    function updateTrialBadge() {
+        const badge = document.getElementById('trialBadge');
+        if (daysLeft <= 0) {
+            badge.textContent = '⏰ انتهت الفترة التجريبية';
+            badge.style.background = 'linear-gradient(135deg, #EF5350, #E53935)';
+        } else if (daysLeft <= 7) {
+            badge.textContent = '⚠️ الأيام المجانية: ' + daysLeft + ' يوم';
+            badge.style.background = 'linear-gradient(135deg, #FF7043, #F4511E)';
+        } else {
+            badge.textContent = '⏳ الأيام المجانية: ' + daysLeft + ' يوم';
+        }
+    }
+
+    function navigate(screen) {
+        if (!isSubscribed && daysLeft <= 0) {
+            showPaywall();
+            return;
+        }
+        if (!isSubscribed && productsSold >= 4) {
+            showPaywall();
+            return;
+        }
+
+        if (screen === 'skill') {
+            alert('🎓 تعلم حرفة\n\nفيديوهات تعليمية - اختار حرفة وابدأ التعلم');
+        } else if (screen === 'market') {
+            productsSold++;
+            alert('🛒 سوق الحومة\n\nبيع وشراء المنتوجات\n\nعدد المنتوجات المباعة: ' + productsSold);
+            if (!isSubscribed && productsSold >= 4) {
+                showPaywall();
+            }
+        } else if (screen === 'wallet') {
+            alert('💰 فلوسي\n\nأرباحك من المبيعات: 0 درهم');
+        }
+    }
+
+    function showPaywall() {
+        document.getElementById('paywall').classList.add('active');
+    }
+
+    function closePaywall() {
+        document.getElementById('paywall').classList.remove('active');
+    }
+
+    function subscribe() {
+        isSubscribed = true;
+        daysLeft = 30;
+        updateTrialBadge();
+        closePaywall();
+        alert('✅ شكراً على الاشتراك!\n\nتقةدر دابا تبيع بلا حدود.');
+    }
+
+    function openWhatsApp() {
+        window.open('https://wa.me/212711366556', '_blank');
+    }
+
+    // محاكاة مرور الأيام
+    setInterval(() => {
+        if (daysLeft > 0 && !isSubscribed) {
+            daysLeft--;
+            updateTrialBadge();
+            if (daysLeft <= 0) {
+                showPaywall();
+            }
+        }
+    }, 10000); // كل 10 ثواني = يوم
+
+    updateTrialBadge();
+</script>
+
+</body>
+</html>
